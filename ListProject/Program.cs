@@ -18,21 +18,21 @@ namespace ListProject
             list.Add(6);
             list.Add(4);
             list.Add(4);
-            list.RemoveAt(5);
-            Console.WriteLine(list[5]);
-            List<int> k = new List<int>();
-            k.Add(4);
-            k.Add(5);
-            k.Add(6);
-            k.Add(3);
-            k.Add(3);
-            k.Add(1);
-            k.Remove(6);
+        
+         
 
-            for (int i = 0; i < k.Count; i++)
+            for (int i = 0; i < list.GetLength(); i++)
             {
-                Console.WriteLine(k[i]);
-            }/**
+                Console.WriteLine(list[i]);
+            }
+            Console.WriteLine("--------------");
+            list.Reverse();
+            for (int i = 0; i < list.GetLength(); i++)
+            {
+                Console.WriteLine(list[i]);
+            }
+
+            /**
 
             Console.WriteLine( k.LastIndexOf(3) );
 

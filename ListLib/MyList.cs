@@ -132,7 +132,16 @@ namespace ListLib
         }
         #endregion
         #region Reverse
+        public void Reverse()
+        {
+           T[] RData = new T[_index];
+            for (int i = _index - 1; i >= 0; i--)
+            {
+                RData[(_index-1)-i] = _data[i];
+            }
+            _data = RData;
 
+        }
         #endregion
         #region Length
         public int GetLength()
