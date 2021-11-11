@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -7,12 +7,12 @@ namespace ListLib
 {
     public class MyList<T>
     {
-         
+
         private T[] _data;
         private int _index = 0;
-        private int _capacityIncLvl = 2;//her defe yeni list yaradilinda capacity  3 defe artacaq
+        private int _capacityIncLvl = 2;//her defe yeni list yaradilinda capacity  2 defe artacaq
         #region Indexer
-           public T this[int index]
+        public T this[int index]
         {
             get { return _data[index]; }
             set { _data[index] = value; }
@@ -55,6 +55,38 @@ namespace ListLib
                 Add(arr[i]);
             }
         }
+        #endregion
+        #region FindAll
+        public MyList<T> FindAll(Predicate<T> match)
+        {
+            MyList<T> Result = new MyList<T>();
+            for (int i = 0; i < _index; i++)
+            {
+                if (match(_data[i]))
+                {
+                    Result.Add(_data[i]);
+                }
+            }
+
+            return Result;
+        }
+
+
+        #endregion
+        #region Find
+        public T Find(Predicate<T> func)
+        {
+            for (int i = 0; i < _index; i++)
+            {
+                if (func(_data[i]))
+                {
+                    return _data[i];
+                }
+            }
+            return default(T);
+        }
+
+
         #endregion
         #region Clear
         /// <summary>
@@ -117,7 +149,7 @@ namespace ListLib
         /// <param name="item"></param>
         /// <param name="index"></param>
         /// <returns>elementin indexin eger element listde yoxdusa -1</returns>
-        public int IndexOf(int item,int index)
+        public int IndexOf(int item, int index)
         {
             if (item.Equals(_data[index]))
             {
@@ -167,15 +199,41 @@ namespace ListLib
         /// elementi listden silir
         /// </summary>
         /// <param name="item"></param>
-        public void Remove(T item)
+        public int Remove(T item)
         {
-            for (int i = 0; i < _data.Length; i++)
+            if (IndexOfItem(item) < 0)
+            {
+                return -1;
+            }
+           
+            RemoveAt(IndexOfItem(item));
+            _index--;
+            if (IndexOfItem(item) > 0)
+            {
+                Remove(item);
+            }
+            
+            return -1;
+
+        }
+        /// <summary>
+        /// elementin hansi indexde yerlesdiyin gosterir
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns> int tipinde indeksi return edir</returns>
+        private int IndexOfItem(T item)
+        {
+            int IndexOfItem = -1;
+            for (int i = 0; i < _index; i++)
             {
                 if (item.Equals(_data[i]))
                 {
-                    _data[i] = default;
+                    IndexOfItem = i;
+                    return IndexOfItem;
                 }
             }
+
+            return IndexOfItem;
         }
         /// <summary>
         /// gosterilen indexde olan elementi silir
@@ -183,7 +241,10 @@ namespace ListLib
         /// <param name="index"></param>
         public void RemoveAt(int index)
         {
-            _data[index] = default;
+            for (int i = index; i < _index; i++)
+            {
+                _data[i] = _data[i + 1];
+            }
         }
         #endregion
         #region Reverse
@@ -192,10 +253,10 @@ namespace ListLib
         /// </summary>
         public void Reverse()
         {
-           T[] RData = new T[_index];
+            T[] RData = new T[_index];
             for (int i = _index - 1; i >= 0; i--)
             {
-                RData[(_index-1)-i] = _data[i];
+                RData[(_index - 1) - i] = _data[i];
             }
             _data = RData;
 
