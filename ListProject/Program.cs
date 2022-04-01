@@ -19,23 +19,23 @@ namespace ListProject
           //  Console.WriteLine(l.FindAll(n => n > 3));
 
 
-            Console.WriteLine("Custom listimiz");
+            //Console.WriteLine("Custom listimiz");
 
-            MyList<int> list = new MyList<int>();
-            list.Add(4);
-            list.Add(5);
-            list.Add(3);
-            list.Add(8);
-            list.Add(6);
-            list.Add(5);
-            list.Add(6);
-            list.Add(4);
-            list.Add(4);
-            list.Remove(4);
-            for (int i = 0; i < list.GetLength(); i++)
-            {
-                Console.WriteLine(list[i]);
-            }
+            //MyList<int> list = new MyList<int>();
+            //list.Add(4);
+            //list.Add(5);
+            //list.Add(3);
+            //list.Add(8);
+            //list.Add(6);
+            //list.Add(5);
+            //list.Add(6);
+            //list.Add(4);
+            //list.Add(4);
+            //list.Remove(4);
+            //for (int i = 0; i < list.GetLength(); i++)
+            //{
+            //    Console.WriteLine(list[i]);
+            //}
 
             /**
            // Console.WriteLine(list.Find(n => n>3));
